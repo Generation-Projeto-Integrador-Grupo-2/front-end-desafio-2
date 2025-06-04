@@ -1,36 +1,62 @@
-import './Login.css';
+import { Link, useNavigate } from "react-router-dom";
+import "./Login.css";
+import { useContext, useEffect, useState } from "react";
+import type { ChangeEvent } from "react";
+import { RotatingLines } from "react-loader-spinner";
+import type UsuarioLogin from "../../models/UsuarioLogin";
+import { AuthContext } from "../../context/AuthContext";
 
 function Login() {
+  const navigate = useNavigate();
+  const { usuario, handleLogin, isLoading } = useContext(AuthContext);
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
+  const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>(
+    {} as UsuarioLogin
+  );
+
+  useEffect(() => {
+    if (usuario?.token !== "") {
+      navigate("/login");
+    }
+  }, [usuario, navigate]);
+
+  function atualizarEstado(e: ChangeEvent<HTMLInputElement>) {
+    setUsuarioLogin({
+      ...usuarioLogin,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  function login(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
-    
-    console.log("Form enviado");
-  };
+    handleLogin(usuarioLogin);
+  }
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 h-screen place-items-center font-bold bg-[#F3F4F6]">
       <form
-        onSubmit={handleSubmit}
-        className="flex justify-center items-center flex-col w-1/2 gap-4 bg-white p-8 rounded-lg shadow-lg"
+        className="flex justify-center items-center flex-col w-2/3 gap-5 bg-[#FFFFFF] p-8 rounded-xl shadow-md"
+        onSubmit={login}
       >
-        <h2 className="text-[#374151] text-5xl">Entrar</h2>
+        <h2 className="text-5xl text-[#374151] mb-4">Entrar</h2>
 
         <div className="flex flex-col w-full">
-          <label htmlFor="usuario" className="text-[#6B7280]">
+          <label htmlFor="usuario" className="text-[#374151]">
             Usuário
           </label>
           <input
             type="text"
             id="usuario"
             name="usuario"
-            placeholder="Usuário"
-            className="border-2 border-[#374151] rounded p-2 bg-[#FFFFFF] text-[#374151]"
+            placeholder="Usuário ou e-mail"
+            className="border-2 border-[#6B7280] rounded p-2 bg-[#F3F4F6] text-[#374151]"
+            value={usuarioLogin.usuario}
+            onChange={atualizarEstado}
           />
         </div>
 
         <div className="flex flex-col w-full">
-          <label htmlFor="senha" className="text-[#6B7280]">
+          <label htmlFor="senha" className="text-[#374151]">
             Senha
           </label>
           <input
@@ -38,24 +64,36 @@ function Login() {
             id="senha"
             name="senha"
             placeholder="Senha"
-            className="border-2 border-[#374151] rounded p-2 bg-[#FFFFFF] text-[#374151]"
+            className="border-2 border-[#6B7280] rounded p-2 bg-[#F3F4F6] text-[#374151]"
+            value={usuarioLogin.senha}
+            onChange={atualizarEstado}
           />
         </div>
 
         <button
           type="submit"
-          className="rounded bg-[#84CC16] flex justify-center hover:bg-[#6B7280] text-white w-1/2 py-2 transition-colors"
+          className="rounded text-white bg-[#84CC16] hover:bg-[#65a30d] w-1/2 py-2 flex justify-center items-center"
         >
-          <span>Entrar</span>
+          {isLoading ? (
+            <RotatingLines
+              strokeColor="white"
+              strokeWidth="5"
+              animationDuration="0.75"
+              width="24"
+              visible={true}
+            />
+          ) : (
+            <span>Entrar</span>
+          )}
         </button>
 
-        <hr className="border-[#374151] w-full" />
+        <hr className="w-full border-[#6B7280]" />
 
-        <p className="text-[#374151]">
-          Ainda não tem uma conta?{' '}
-          <a href="/cadastro" className="text-[#84CC16] hover:underline">
+        <p className="text-[#6B7280]">
+          Ainda não tem uma conta?{" "}
+          <Link to="/cadastro" className="hover:underline text-[#374151]">
             Cadastre-se
-          </a>
+          </Link>
         </p>
       </form>
 

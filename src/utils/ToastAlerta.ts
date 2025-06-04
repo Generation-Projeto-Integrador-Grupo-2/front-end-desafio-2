@@ -1,29 +1,17 @@
-import { toast } from 'react-toastify'
+import { toast } from 'react-toastify';
 
-export function ToastAlerta(
-  mensagem: string,
-  tipo: 'sucesso' | 'erro' | 'info' = 'info'
-) {
-  const config = {
-    position: 'top-right' as const,
-    autoClose: 2000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: false,
-    draggable: false,
-    theme: 'colored',
-  }
-
+export function ToastAlerta(mensagem: string, tipo: string = 'info') {
   switch (tipo) {
     case 'sucesso':
-      toast.success(mensagem, config)
-      break
+      toast.success(mensagem);
+      break;
     case 'erro':
-      toast.error(mensagem, config)
-      break
-    case 'info':
+      toast.error(mensagem);
+      break;
+    case 'aviso':
+      toast.warn(mensagem);
+      break;
     default:
-      toast.info(mensagem, config)
-      break
+      toast.info(mensagem);
   }
 }
