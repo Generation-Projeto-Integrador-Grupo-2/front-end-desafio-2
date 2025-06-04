@@ -1,22 +1,29 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useContext, useEffect, useState } from "react";
-import type { ChangeEvent } from "react";
-import { RotatingLines } from "react-loader-spinner";
+import type { ChangeEvent, FormEvent } from "react";
 import type UsuarioLogin from "../../models/UsuarioLogin";
 import { AuthContext } from "../../context/AuthContext";
+import { RotatingLines } from "react-loader-spinner";
 
 function Login() {
   const navigate = useNavigate();
   const { usuario, handleLogin, isLoading } = useContext(AuthContext);
 
-  const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>(
-    {} as UsuarioLogin
-  );
+  const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>({
+    id: 0,
+    nome: "",
+    usuario: "",
+    email: "",
+    senha: "",
+    foto: "",
+    token: "",
+    tipo: "",
+  });
 
   useEffect(() => {
     if (usuario?.token !== "") {
-      navigate("/login");
+      navigate("/"); 
     }
   }, [usuario, navigate]);
 
@@ -27,7 +34,7 @@ function Login() {
     });
   }
 
-  function login(e: ChangeEvent<HTMLFormElement>) {
+  function login(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     handleLogin(usuarioLogin);
   }
@@ -48,10 +55,11 @@ function Login() {
             type="text"
             id="usuario"
             name="usuario"
-            placeholder="Usuário ou e-mail"
+            placeholder="Usuário"
             className="border-2 border-[#6B7280] rounded p-2 bg-[#F3F4F6] text-[#374151]"
             value={usuarioLogin.usuario}
             onChange={atualizarEstado}
+            required
           />
         </div>
 
@@ -67,12 +75,14 @@ function Login() {
             className="border-2 border-[#6B7280] rounded p-2 bg-[#F3F4F6] text-[#374151]"
             value={usuarioLogin.senha}
             onChange={atualizarEstado}
+            required
           />
         </div>
 
         <button
           type="submit"
           className="rounded text-white bg-[#84CC16] hover:bg-[#65a30d] w-1/2 py-2 flex justify-center items-center"
+          disabled={isLoading}
         >
           {isLoading ? (
             <RotatingLines

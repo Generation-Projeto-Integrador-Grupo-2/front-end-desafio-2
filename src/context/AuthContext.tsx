@@ -1,4 +1,4 @@
-import { createContext, type ReactNode, useState } from "react";
+import { createContext, type ReactNode, useEffect, useState } from "react";
 import type UsuarioLogin from "../models/UsuarioLogin";
 import { ToastAlerta } from "../utils/ToastAlerta";
 import { login } from "../service/Service";
@@ -17,17 +17,27 @@ interface AuthProviderProps {
 export const AuthContext = createContext({} as AuthContextProps);
 
 export function AuthProvider({ children }: AuthProviderProps) {
-  const [usuario, setUsuario] = useState<UsuarioLogin>({
-    id: 0,
-    nome: "",
-    usuario: "",
-    senha: "",
-    foto: "",
-    token: "",
-    tipo: null,
+  const [usuario, setUsuario] = useState<UsuarioLogin>(() => {
+    const usuarioSalvo = localStorage.getItem("usuario");
+    return usuarioSalvo
+      ? JSON.parse(usuarioSalvo)
+      : {
+          id: 0,
+          nome: "",
+          usuario: "",
+          senha: "",
+          foto: "",
+          token: "",
+          tipo: null,
+        };
   });
 
   const [isLoading, setIsLoading] = useState(false);
+
+  // Sempre que o usuário mudar, salva no localStorage
+  useEffect(() => {
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+  }, [usuario]);
 
   async function handleLogin(usuarioLogin: UsuarioLogin) {
     setIsLoading(true);
@@ -50,6 +60,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
       token: "",
       tipo: null,
     });
+    localStorage.removeItem("usuario");
   }
 
   return (

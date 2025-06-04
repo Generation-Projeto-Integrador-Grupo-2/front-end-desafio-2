@@ -126,7 +126,7 @@ function Cadastro() {
             type="email"
             id="usuario"
             name="usuario"
-            placeholder="E-mail"
+            placeholder="Usuario"
             autoComplete="email"
             className="border-2 border-[#6B7280] rounded p-2 bg-[#F3F4F6] text-[#374151]"
             value={usuario.usuario}
