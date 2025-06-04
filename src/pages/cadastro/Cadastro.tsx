@@ -94,7 +94,7 @@ function Cadastro() {
         onSubmit={cadastrarNovoUsuario}
         noValidate
       >
-        <h2 className="text-[#374151] text-5xl mb-6">Cadastrar</h2>
+        <h2 className="text-[#374151] text-5xl mb-6 w-full text-center">Cadastrar</h2>
 
         {errorMsg && (
           <div
