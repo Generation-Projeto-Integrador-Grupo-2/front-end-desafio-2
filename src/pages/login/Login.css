@@ -1,0 +1,55 @@
+.fundoLogin {
+  background-image: url("../../assets/foto-login.jpg");
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+body {
+  background-color: #F3F4F6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h2 {
+  color: #374151;
+}
+
+input {
+  border: 2px solid #6B7280;
+  color: #374151;
+  background-color: #F3F4F6;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+button {
+  background-color: #84CC16;
+  color: #FFFFFF;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #65a30d; 
+}
+
+hr {
+  border-color: #6B7280;
+}
+
+p {
+  color: #6B7280;
+}
+
+p a {
+  color: #374151;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
