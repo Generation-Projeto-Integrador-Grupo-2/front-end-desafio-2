@@ -50,3 +50,11 @@ export const cadastrarCorrida = async (
     return resposta.data;
 }
 
+export const aceitarCorrida = async (
+    id: number,
+    header: Object
+): Promise<Corrida> => {
+    const resposta = await api.put<Corrida>(`/corridas/aceitar/${id}`, null, header);
+    return resposta.data;
+};
+

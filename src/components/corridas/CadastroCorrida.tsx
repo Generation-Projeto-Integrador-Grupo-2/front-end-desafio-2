@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { toast } from 'react-toastify';
 import type Corrida from '../../models/Corrida';
-import { calcularDistancia } from '../../services/MapsService';
+import { calcularDistancia } from '../../service/MapsService';
 import MapaTrajeto from './MapaTrajetoComponent';
 import { buscarTempoCorrida, cadastrarCorrida } from '../../service/Service';
 import type { CalculoTempoCorrida } from '../../models/CalculoTempoCorrida';
