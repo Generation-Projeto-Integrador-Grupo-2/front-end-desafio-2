@@ -18,7 +18,7 @@ function Perfil() {
     }, [usuario.token])
 
     return (
-        <section className="h-screen w-full bg-gradient-to-r from-[#84cc16] to-green-300 flex items-center justify-center px-4">
+        <section className="h-screen w-full bg-[#f3f4f6] flex items-center justify-center px-4">
             <div className="bg-white p-12 rounded-2xl shadow-2xl max-w-3xl w-full text-left">
                 <div className="flex items-center gap-8 mb-6">
                     <img

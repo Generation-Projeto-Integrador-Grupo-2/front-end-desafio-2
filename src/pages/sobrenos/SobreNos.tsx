@@ -1,25 +1,6 @@
-import { useContext, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { AuthContext } from "../../context/AuthContext"
-
-
-
 function SobreNos() {
-
-    const navigate = useNavigate();
-
-    const { usuario } = useContext(AuthContext)
-
-    useEffect(() => {
-        if (usuario.token === "") {
-            alert("Você precisa estar logado")
-            navigate("/")
-        }
-    }, [usuario.token])
-
     return (
-
-        <div className="bg-gradient-to-r from-[#84cc16] to-green-300 text-[#374151] flex items-center justify-center min-h-screen">
+        <div className="bg-[#f3f4f6] text-[#374151] flex items-center justify-center min-h-screen">
             <main className="max-w-5xl mx-auto px-6 py-10">
                 <div className="bg-white p-12 rounded-2xl shadow-2xl max-w-3xl w-full text-left">
                     <section className="mb-10">
