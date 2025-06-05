@@ -4,6 +4,8 @@ import TestimonialsCarousel from "../../components/testimonials/TestimonialsCaro
 function Home() {
     return (
         <>
+            {/* Seção principal da Home */}
+
             <section
                 id="home"
                 className="h-screen bg-[#f3f4f6] text-black flex items-center justify-evenly"
@@ -46,3 +48,4 @@ function Home() {
 }
 
 export default Home
+
