@@ -1,4 +1,3 @@
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Footer from './components/footer/Footer'
@@ -11,11 +10,12 @@ import { AuthProvider } from './context/AuthContext'
 import SobreNos from './pages/sobrenos/SobreNos'
 import CadastroMotorista from './components/motoristas/CadastroMotorista'
 import CadastroCorrida from './components/corridas/CadastroCorrida'
+import ListaCorridas from './pages/corridas/ListaCorridas'
 
 function App() {
   return (
     <>
-      <AuthProvider>
+      {/* <AuthProvider>
         <BrowserRouter>
           <Navbar />
           <div className="min-h-[80vh]">
@@ -28,11 +28,13 @@ function App() {
               <Route path="/perfil" element={<Perfil />} />
               <Route path='/motoristas/cadastrar' element={<CadastroMotorista />} />
               <Route path='/corridas/cadastrar' element={<CadastroCorrida />} />
+              <Route path='/corridas' element={<ListaCorridas />} />
             </Routes>
           </div>
           <Footer />
         </BrowserRouter>
-      </AuthProvider>
+      </AuthProvider> */}
+      <ListaCorridas />
     </>
   )
 }
