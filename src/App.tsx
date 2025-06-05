@@ -34,7 +34,6 @@ function App() {
           <Footer />
         </BrowserRouter>
       </AuthProvider>
-      <ListaCorridas />
     </>
   )
 }
