@@ -6,7 +6,7 @@ function Footer() {
 
     return (
         <>
-            <div className="flex justify-center bg-black text-[#f3f4f6]">
+            <div className="flex justify-center bg-black text-white">
                 <div className="container flex flex-col items-start py-4 px-4">
                     <div className="flex gap-4 items-start flex-wrap">
 
@@ -31,6 +31,11 @@ function Footer() {
                                 </a>
                             </div>
                         </div>
+                    </div>
+                    <div className="col-span-1 md:col-span-1 mt-4">
+                        <p className="mb-1">📍 Av. Paulista, 100 - Bela Vista, São Paulo - SP 01310-000</p>
+                        <p className="mb-1">📞 (11) 0000-0000</p>
+                        <p className="mb-4">✉️ contato@rebu98.com</p>
                     </div>
 
                     {/* Linha branca horizontal */}

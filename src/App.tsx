@@ -15,7 +15,7 @@ import ListaCorridas from './pages/corridas/ListaCorridas'
 function App() {
   return (
     <>
-      {/* <AuthProvider>
+      <AuthProvider>
         <BrowserRouter>
           <Navbar />
           <div className="min-h-[80vh]">
@@ -33,9 +33,9 @@ function App() {
           </div>
           <Footer />
         </BrowserRouter>
-      </AuthProvider> 
-      <ListaCorridas />*/}
-      <SobreNos/>
+      </AuthProvider>
+      <ListaCorridas />
+
     </>
   )
 }
