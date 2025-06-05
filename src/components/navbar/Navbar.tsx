@@ -8,11 +8,12 @@ const Navbar = () => {
             <div className="flex items-center justify-between relative">
 
                 {/* Logo */}
-                <Link to="/" className="flex items-center gap-2 z-10">
-                    <div className="w-8 h-8 bg-[#84cc16] rounded flex items-center justify-center">
-                        <span className="text-white text-sm font-medium">rebU</span>
-                    </div>
-                    <span className="text-[#354B45] font-semibold">98</span>
+                <Link to="/" className="flex items-center gap-2 z-10 w-15 h-10">
+                    <img
+                        src="https://ik.imagekit.io/6tjnbersb/rebu98.png?updatedAt=1749133477430"
+                        alt="Imagem rebU"
+                        className="w-[650px] h-auto rounded-3xl"
+                    />
                 </Link>
 
                 {/* Botões das Páginas */}
@@ -25,6 +26,60 @@ const Navbar = () => {
                             } hover:text-[#84cc16] transition-colors font-semibold`}
                     >
                         Home
+                    </Link>
+                    <Link
+                        to="/corridas"
+                        className={`${location.pathname === '/corridas'
+                            ? 'text-[#374151]'
+                            : 'text-[#354B45]'
+                            } hover:text-[#84cc16] transition-colors font-semibold`}
+                    >
+                        Corridas
+                    </Link>
+                    <Link
+                        to="/corridas/cadastrar"
+                        className={`${location.pathname === '/corridas/cadastrar'
+                            ? 'text-[#374151]'
+                            : 'text-[#354B45]'
+                            } hover:text-[#84cc16] transition-colors font-semibold`}
+                    >
+                        Nova Corrida
+                    </Link>
+                    <Link
+                        to="/motoristas/cadastrar"
+                        className={`${location.pathname === '/motoristas/cadastrar'
+                            ? 'text-[#374151]'
+                            : 'text-[#354B45]'
+                            } hover:text-[#84cc16] transition-colors font-semibold`}
+                    >
+                        Cadastrar Motorista
+                    </Link>
+                    <Link
+                        to="/corridas"
+                        className={`${location.pathname === '/corridas'
+                            ? 'text-[#374151]'
+                            : 'text-[#354B45]'
+                            } hover:text-[#84cc16] transition-colors font-semibold`}
+                    >
+                        Corridas
+                    </Link>
+                    <Link
+                        to="/corridas/cadastrar"
+                        className={`${location.pathname === '/corridas/cadastrar'
+                            ? 'text-[#374151]'
+                            : 'text-[#354B45]'
+                            } hover:text-[#84cc16] transition-colors font-semibold`}
+                    >
+                        Nova Corrida
+                    </Link>
+                    <Link
+                        to="/motoristas/cadastrar"
+                        className={`${location.pathname === '/motoristas/cadastrar'
+                            ? 'text-[#374151]'
+                            : 'text-[#354B45]'
+                            } hover:text-[#84cc16] transition-colors font-semibold`}
+                    >
+                        Cadastrar Motorista
                     </Link>
                     <Link
                         to="/sobrenos"

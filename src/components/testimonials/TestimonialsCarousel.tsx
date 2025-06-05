@@ -1,12 +1,10 @@
-
-
 import { motion, useScroll, useMotionValue, useMotionValueEvent, animate, MotionValue } from "motion/react"
 import { useRef } from "react"
 
 const testimonials = [
   {
     nome: "Lorena Belo",
-    cidade: "Monte Alegre - PA",
+    cidade: "Belém - PA",
     depoimento: "O rebU transformou minha rotina! Seguro, rápido e prático.",
     avatarUrl: "https://ik.imagekit.io/6tjnbersb/TestimonialsRebu98/lorena.jpg?updatedAt=1749063697065"
   },
@@ -25,13 +23,13 @@ const testimonials = [
   {
     nome: "Elisa Bicudo",
     cidade: "Osasco - SP",
-    depoimento: "O rebU transformou minha rotina! Seguro, rápido e prático.",
+    depoimento: "O rebU deixou meu dia a dia mais leve e o UX design é simplesmente incrível!!",
     avatarUrl: "https://ik.imagekit.io/6tjnbersb/TestimonialsRebu98/elisa.jpg?updatedAt=1749064842627",
   },
   {
     nome: "Geandro Araújo",
     cidade: "Balneário Camboriú - SC",
-    depoimento: "Economizei muito compartilhando caronas pelo rebU.",
+    depoimento: "Com o rebU, ficou fácil descer pra BC com carona garantida!",
     avatarUrl: "https://ik.imagekit.io/6tjnbersb/TestimonialsRebu98/geandro.jpg?updatedAt=1749064842748",
   },
   {
@@ -48,8 +46,8 @@ export default function TestimonialsCarousel() {
   const maskImage = useScrollOverflowMask(scrollXProgress)
 
   return (
-    <section className="py-16 bg-white">
-      <h2 className="text-3xl font-bold text-center mb-8">O que dizem sobre o rebU98</h2>
+    <section className="py-16 bg-[#f3f4f6]">
+      <h2 className="text-3xl font-bold text-center mb-8">O que dizem sobre o <span className="text-[#84cc16] font-bold">rebU98</span></h2>
       <div id="carousel" className="relative max-w-4xl mx-auto">
         <motion.ul ref={ref} style={{ maskImage }} className="flex gap-4 overflow-x-scroll px-2">
           {testimonials.map((t, i) => (
