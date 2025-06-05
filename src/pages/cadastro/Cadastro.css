@@ -1,0 +1,59 @@
+.fundoCadastro {
+  background-image: url("../../assets/plano-fundo-cadastro.jpg");
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.5s ease-in-out;
+}
+
+form {
+  max-width: 480px;
+  background-color: #FFFFFF; 
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px rgba(107, 114, 128, 0.1); 
+}
+
+h2 {
+  color: #374151; 
+}
+
+label {
+  margin-bottom: 0.25rem;
+  color: #374151; 
+}
+
+input {
+  font-size: 1rem;
+  color: #374151; 
+  background-color: #F3F4F6; 
+  border: 2px solid #6B7280; 
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus {
+  border-color: #84CC16;
+  box-shadow: 0 0 0 2px rgba(132, 204, 22, 0.3);
+}
+
+[role="alert"] {
+  background-color: #FDE68A; 
+  color: #92400E; 
+  border: 1px solid #F59E0B; 
+}
+
+
+small {
+  color: #6B7280;
+}
+
+@media (max-width: 1023px) {
+  .fundoCadastro {
+    display: none;
+  }
+}

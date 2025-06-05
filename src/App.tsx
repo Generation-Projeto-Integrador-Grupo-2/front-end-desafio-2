@@ -1,28 +1,35 @@
+
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
-import CadastroMotorista from './components/motoristas/CadastroMotorista'
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import CadastroCorrida from './components/corridas/CadastroCorrida';
+import Footer from './components/footer/Footer'
+import Navbar from './components/navbar/Navbar'
+import Home from './pages/home/Home'
+import Login from './pages/login/Login'
+import Cadastro from './pages/cadastro/Cadastro'
+import Perfil from './pages/perfil/Perfil'
+import { AuthProvider } from './context/AuthContext'
+import SobreNos from './pages/sobrenos/SobreNos'
 
 function App() {
   return (
-    <BrowserRouter>
-      <div>
-        <Routes>
-          <Route path="/motoristas/novo" element={<CadastroMotorista />} />
-          <Route path="/corridas/nova" element={<CadastroCorrida />} />
-        </Routes>
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          closeOnClick
-          pauseOnHover
-          theme="light"
-        />
-      </div>
-    </BrowserRouter>
+    <>
+      <AuthProvider>
+        <BrowserRouter>
+          <Navbar />
+          <div className="min-h-[80vh]">
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/cadastro" element={<Cadastro />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/sobrenos" element={<SobreNos />} />
+              <Route path="/perfil" element={<Perfil />} />
+            </Routes>
+          </div>
+          <Footer />
+        </BrowserRouter>
+      </AuthProvider>
+    </>
   )
 }
 

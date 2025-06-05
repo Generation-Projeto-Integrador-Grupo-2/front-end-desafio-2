@@ -1,3 +1,4 @@
+
 import type { TipoUsuario } from "./TipoUsuario";
 
 export default interface UsuarioLogin {
@@ -9,3 +10,4 @@ export default interface UsuarioLogin {
     token: string;
     tipo?: TipoUsuario;
 }
+
