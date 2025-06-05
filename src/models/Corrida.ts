@@ -9,6 +9,6 @@ export default interface Corrida {
     horario: string;
     velocidadeMedia: number;
     distancia: number;
-    usuario: Usuario;
-    motorista: Motorista;
+    usuario?: Usuario;
+    motorista?: Motorista;
 }
