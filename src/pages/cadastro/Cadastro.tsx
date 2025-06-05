@@ -5,7 +5,8 @@ import './Cadastro.css'
 import { RotatingLines } from 'react-loader-spinner'
 import { ToastAlerta } from '../../utils/ToastAlerta'
 import { cadastrarUsuario } from '../../service/Service'
-import type { Usuario } from '../../models/Usuario'
+import type Usuario from '../../models/Usuario'
+
 
 function Cadastro() {
   const navigate = useNavigate()
@@ -16,7 +17,7 @@ function Cadastro() {
   const [usuario, setUsuario] = useState<Usuario>({
     id: 0,
     nome: '',
-    usuario: '',
+    email: '',
     senha: '',
     foto: '',
     tipo: 'PASSAGEIRO'
@@ -50,12 +51,12 @@ function Cadastro() {
       return
     }
 
-    if (!usuario.nome.trim() || !usuario.usuario.trim()) {
+    if (!usuario.nome.trim() || !usuario.email.trim()) {
       setErrorMsg('Nome e e-mail são obrigatórios.')
       return
     }
 
-    if (!validarEmail(usuario.usuario)) {
+    if (!validarEmail(usuario.email)) {
       setErrorMsg('Por favor, insira um e-mail válido.')
       return
     }
@@ -65,7 +66,7 @@ function Cadastro() {
     try {
       const { id, corrida, motorista, ...dadosUsuario } = usuario
 
-      await cadastrarUsuario('/usuarios/cadastrar', dadosUsuario, () => {})
+      await cadastrarUsuario('/usuarios/cadastrar', dadosUsuario, () => { })
       ToastAlerta('Usuário cadastrado com sucesso!')
       navigate('/login')
     } catch (error: any) {
@@ -129,7 +130,7 @@ function Cadastro() {
             placeholder="Usuario"
             autoComplete="email"
             className="border-2 border-[#6B7280] rounded p-2 bg-[#F3F4F6] text-[#374151]"
-            value={usuario.usuario}
+            value={usuario.email}
             onChange={atualizarEstado}
             required
           />

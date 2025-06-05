@@ -13,17 +13,16 @@ function Login() {
   const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>({
     id: 0,
     nome: "",
-    usuario: "",
     email: "",
     senha: "",
     foto: "",
     token: "",
-    tipo: "",
+    tipo: null,
   });
 
   useEffect(() => {
     if (usuario?.token !== "") {
-      navigate("/"); 
+      navigate("/");
     }
   }, [usuario, navigate]);
 
@@ -57,7 +56,7 @@ function Login() {
             name="usuario"
             placeholder="Usuário"
             className="border-2 border-[#6B7280] rounded p-2 bg-[#F3F4F6] text-[#374151]"
-            value={usuarioLogin.usuario}
+            value={usuarioLogin.email}
             onChange={atualizarEstado}
             required
           />

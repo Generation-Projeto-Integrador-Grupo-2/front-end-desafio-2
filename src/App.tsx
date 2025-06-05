@@ -9,6 +9,8 @@ import Cadastro from './pages/cadastro/Cadastro'
 import Perfil from './pages/perfil/Perfil'
 import { AuthProvider } from './context/AuthContext'
 import SobreNos from './pages/sobrenos/SobreNos'
+import CadastroMotorista from './components/motoristas/CadastroMotorista'
+import CadastroCorrida from './components/corridas/CadastroCorrida'
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/sobrenos" element={<SobreNos />} />
               <Route path="/perfil" element={<Perfil />} />
+              <Route path='/motoristas/cadastrar' element={<CadastroMotorista />} />
+              <Route path='/corridas/cadastrar' element={<CadastroCorrida />} />
             </Routes>
           </div>
           <Footer />
