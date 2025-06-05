@@ -33,8 +33,9 @@ function App() {
           </div>
           <Footer />
         </BrowserRouter>
-      </AuthProvider> */}
-      <ListaCorridas />
+      </AuthProvider> 
+      <ListaCorridas />*/}
+      <SobreNos/>
     </>
   )
 }
