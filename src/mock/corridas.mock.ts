@@ -13,9 +13,9 @@ export const corridasMock: Corrida[] = [
             id: 1,
             nome: "Maria Silva",
             email: "maria@email.com",
-            senha: "", // Adding required field
+            senha: "",
             foto: "https://i.pravatar.cc/150?img=1",
-            tipo: "PASSAGEIRO" // Adding required field
+            tipo: "PASSAGEIRO"
         }
     },
     {
@@ -30,9 +30,9 @@ export const corridasMock: Corrida[] = [
             id: 2,
             nome: "João Santos",
             email: "joao@email.com",
-            senha: "", // Adding required field
+            senha: "",
             foto: "https://i.pravatar.cc/150?img=2",
-            tipo: "PASSAGEIRO" // Adding required field
+            tipo: "PASSAGEIRO"
         }
     },
     {
@@ -47,9 +47,9 @@ export const corridasMock: Corrida[] = [
             id: 3,
             nome: "Ana Oliveira",
             email: "ana@email.com",
-            senha: "", // Adding required field
+            senha: "",
             foto: "https://i.pravatar.cc/150?img=3",
-            tipo: "PASSAGEIRO" // Adding required field
+            tipo: "PASSAGEIRO"
         }
     }
 ];

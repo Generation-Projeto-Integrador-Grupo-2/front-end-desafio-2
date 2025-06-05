@@ -13,8 +13,8 @@ export const calcularDistancia = async (origem: string, destino: string) => {
             const tempoEmSegundos = response.rows[0].elements[0].duration.value;
 
             return {
-                distancia: distanciaEmMetros / 1000, // converter para km
-                velocidadeMedia: (distanciaEmMetros / tempoEmSegundos) * 3.6, // converter para km/h
+                distancia: distanciaEmMetros / 1000,
+                velocidadeMedia: (distanciaEmMetros / tempoEmSegundos) * 3.6,
                 preco: calcularPreco(distanciaEmMetros / 1000)
             };
         }

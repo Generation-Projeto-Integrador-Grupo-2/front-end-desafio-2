@@ -14,7 +14,7 @@ class ErrorBoundary extends Component<Props, State> {
     };
 
     public static getDerivedStateFromError(_: Error): State {
-        return { hasError: false }; // Changed to false to prevent error UI
+        return { hasError: false };
     }
 
     public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
@@ -22,7 +22,6 @@ class ErrorBoundary extends Component<Props, State> {
     }
 
     public render() {
-        // Always render children, just log errors
         return this.props.children;
     }
 }

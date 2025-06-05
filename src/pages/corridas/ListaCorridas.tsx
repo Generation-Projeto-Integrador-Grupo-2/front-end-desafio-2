@@ -10,7 +10,6 @@ export default function ListaCorridas() {
     const handleAceitarCorrida = async (id: number) => {
         setLoadingId(id);
         try {
-            // Simulate API call
             await new Promise(resolve => setTimeout(resolve, 1500));
             toast.success('Corrida aceita com sucesso!');
         } catch (error) {

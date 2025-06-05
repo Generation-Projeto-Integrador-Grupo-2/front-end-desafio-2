@@ -37,14 +37,14 @@ export default function CadastroCorrida() {
 
             origemAutocomplete.addListener('place_changed', () => {
                 const place = origemAutocomplete.getPlace();
-                const endereco = place.formatted_address || '';  // Add default empty string
+                const endereco = place.formatted_address || '';
                 setCorrida(prev => ({ ...prev, origem: endereco }));
                 if (endereco) handleEnderecoSelecionado();
             });
 
             destinoAutocomplete.addListener('place_changed', () => {
                 const place = destinoAutocomplete.getPlace();
-                const endereco = place.formatted_address || '';  // Add default empty string
+                const endereco = place.formatted_address || '';
                 setCorrida(prev => ({ ...prev, destino: endereco }));
                 if (endereco) handleEnderecoSelecionado();
             });
@@ -89,7 +89,6 @@ export default function CadastroCorrida() {
                 return;
             }
 
-            // Add time validation before submission
             if (!/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(corrida.horario)) {
                 toast.error('Horário deve estar no formato HH:mm');
                 setIsLoading(false);
@@ -115,21 +114,18 @@ export default function CadastroCorrida() {
             const response = await cadastrarCorrida(corridaRequest, setCorrida, header);
 
             if (response?.id) {
-                // Get ride time information after successful creation
                 const tempoResposta = await buscarTempoCorrida(response.id, header);
                 setTempoInfo(tempoResposta);
             }
 
-            // Show success message with longer duration
             toast.success('Corrida cadastrada com sucesso! Aguarde um motorista aceitar sua corrida.', {
-                autoClose: 5000, // 5 seconds
+                autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true
             });
 
-            // Reset form after successful submission
             setCorrida({
                 id: 0,
                 origem: '',
@@ -140,7 +136,6 @@ export default function CadastroCorrida() {
                 distancia: 0
             });
 
-            // Clear the input refs
             if (origemRef.current) origemRef.current.value = '';
             if (destinoRef.current) destinoRef.current.value = '';
 
@@ -159,7 +154,7 @@ export default function CadastroCorrida() {
         <div className="min-h-screen bg-[#f3f4f6] py-8 px-4">
             <div className={`mx-auto transition-all duration-300 ${corrida.origem && corrida.destino ? 'max-w-7xl' : 'max-w-xl'}`}>
                 <div className="flex flex-col md:flex-row gap-8">
-                    {/* Form Section */}
+                    {/* Formulário */}
                     <div className={`bg-white p-8 rounded-lg shadow ${corrida.origem && corrida.destino ? 'md:w-1/2' : 'w-full'}`}>
                         <h1 className="text-3xl font-bold text-[#374151] mb-6 text-center">
                             Solicitar Nova Corrida
@@ -282,7 +277,7 @@ export default function CadastroCorrida() {
                         </form>
                     </div>
 
-                    {/* Map Section - Now side by side on desktop */}
+                    {/* Maps */}
                     {corrida.origem && corrida.destino && (
                         <div className="bg-white p-8 rounded-lg shadow md:w-1/2">
                             <h2 className="text-2xl font-bold text-[#374151] mb-6">

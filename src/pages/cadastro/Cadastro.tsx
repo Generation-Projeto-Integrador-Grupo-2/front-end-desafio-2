@@ -68,7 +68,7 @@ function Cadastro() {
         nome: usuario.nome,
         email: usuario.email,
         senha: usuario.senha,
-        foto: usuario.foto || '' // Provide default empty string if no photo
+        foto: usuario.foto || ''
       }
 
       await cadastrarUsuario('/usuarios/cadastrar', dadosParaCadastro, setUsuario)

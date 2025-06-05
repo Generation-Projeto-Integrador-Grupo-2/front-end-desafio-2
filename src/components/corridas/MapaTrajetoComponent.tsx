@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 
-// Declare Google Maps types
 declare global {
     interface Window {
         google: typeof google;
@@ -21,7 +20,7 @@ export default function MapaTrajeto({ origem, destino }: MapaTrajetoProps) {
         try {
             const map = new google.maps.Map(mapRef.current, {
                 zoom: 12,
-                center: { lat: -23.550520, lng: -46.633308 }, // São Paulo
+                center: { lat: -23.550520, lng: -46.633308 },
             });
 
             const directionsService = new google.maps.DirectionsService();

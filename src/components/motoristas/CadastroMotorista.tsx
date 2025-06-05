@@ -77,10 +77,9 @@ export default function CadastroMotorista() {
             navigate('/perfil');
         } catch (error: any) {
             if (error.response?.status === 400) {
-                // Check if error message contains specific text about being already registered
                 if (error.response.data.message?.includes('já é motorista')) {
                     toast.warning('Você já está cadastrado como motorista!');
-                    navigate('/perfil'); // Redirect to profile since they're already registered
+                    navigate('/perfil');
                 } else {
                     const errorMessage = error.response.data.message ||
                         'Dados inválidos. Verifique as informações fornecidas.';

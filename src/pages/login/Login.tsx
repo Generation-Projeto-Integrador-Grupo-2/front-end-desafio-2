@@ -35,7 +35,7 @@ function Login() {
 
   function login(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log('Login attempt with:', usuarioLogin); // Debug log
+    console.log('Login attempt with:', usuarioLogin);
     handleLogin(usuarioLogin);
   }
 
