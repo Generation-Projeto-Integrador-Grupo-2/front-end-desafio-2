@@ -22,7 +22,7 @@ function Login() {
 
   useEffect(() => {
     if (usuario?.token !== "") {
-      navigate("/");
+      navigate("/home");
     }
   }, [usuario, navigate]);
 
@@ -35,6 +35,7 @@ function Login() {
 
   function login(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    console.log('Login attempt with:', usuarioLogin); // Debug log
     handleLogin(usuarioLogin);
   }
 
@@ -47,14 +48,14 @@ function Login() {
         <h2 className="text-5xl text-[#374151] mb-4">Entrar</h2>
 
         <div className="flex flex-col w-full">
-          <label htmlFor="usuario" className="text-[#374151]">
-            Usuário
+          <label htmlFor="email" className="text-[#374151]">
+            Email
           </label>
           <input
-            type="text"
-            id="usuario"
-            name="usuario"
-            placeholder="Usuário"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
             className="border-2 border-[#6B7280] rounded p-2 bg-[#F3F4F6] text-[#374151]"
             value={usuarioLogin.email}
             onChange={atualizarEstado}

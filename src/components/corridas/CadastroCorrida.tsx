@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { toast } from 'react-toastify';
 import type Corrida from '../../models/Corrida';
+import type { CalculoTempoCorrida } from '../../models/CalculoTempoCorrida';
 import { calcularDistancia } from '../../service/MapsService';
 import MapaTrajeto from './MapaTrajetoComponent';
-import { buscarTempoCorrida, cadastrarCorrida } from '../../service/Service';
-import type { CalculoTempoCorrida } from '../../models/CalculoTempoCorrida';
+import { cadastrarCorrida, buscarTempoCorrida } from '../../service/Service';
+import type { CorridaRequest } from '../../models/CorridaRequest';
 
 export default function CadastroCorrida() {
     const navigate = useNavigate();
@@ -16,8 +17,8 @@ export default function CadastroCorrida() {
         destino: '',
         preco: 0,
         horario: '',
-        velocidadeMedia: 60, // valor padrão temporário
-        distancia: 0, // será calculado pela API depois
+        velocidadeMedia: 60,
+        distancia: 0,
     });
     const [tempoInfo, setTempoInfo] = useState<CalculoTempoCorrida | null>(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -79,23 +80,76 @@ export default function CadastroCorrida() {
         e.preventDefault();
         setIsLoading(true);
 
-        const token = localStorage.getItem('token');
-        const header = {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        };
-
         try {
-            const resposta = await cadastrarCorrida(corrida, setCorrida, header);
-            const tempoResposta = await buscarTempoCorrida(resposta.id, header);
-            setTempoInfo(tempoResposta);
+            const token = localStorage.getItem('token');
 
-            toast.success('Corrida solicitada com sucesso!');
-            navigate('/perfil');
+            if (!token) {
+                toast.error('Sessão expirada. Por favor, faça login novamente.');
+                navigate('/login');
+                return;
+            }
+
+            // Add time validation before submission
+            if (!/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/.test(corrida.horario)) {
+                toast.error('Horário deve estar no formato HH:mm');
+                setIsLoading(false);
+                return;
+            }
+
+            const header = {
+                headers: {
+                    'Authorization': token,
+                    'Content-Type': 'application/json'
+                }
+            };
+
+            const corridaRequest: CorridaRequest = {
+                origem: corrida.origem,
+                destino: corrida.destino,
+                preco: corrida.preco,
+                horario: `${new Date().toISOString().split('T')[0]}T${corrida.horario}:00`,
+                velocidadeMedia: corrida.velocidadeMedia,
+                distancia: corrida.distancia
+            };
+
+            const response = await cadastrarCorrida(corridaRequest, setCorrida, header);
+
+            if (response?.id) {
+                // Get ride time information after successful creation
+                const tempoResposta = await buscarTempoCorrida(response.id, header);
+                setTempoInfo(tempoResposta);
+            }
+
+            // Show success message with longer duration
+            toast.success('Corrida cadastrada com sucesso! Aguarde um motorista aceitar sua corrida.', {
+                autoClose: 5000, // 5 seconds
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+
+            // Reset form after successful submission
+            setCorrida({
+                id: 0,
+                origem: '',
+                destino: '',
+                preco: 0,
+                horario: '',
+                velocidadeMedia: 60,
+                distancia: 0
+            });
+
+            // Clear the input refs
+            if (origemRef.current) origemRef.current.value = '';
+            if (destinoRef.current) destinoRef.current.value = '';
+
         } catch (error: any) {
-            toast.error(error.response?.data?.message || 'Erro ao solicitar corrida');
-            setTempoInfo(null);
+            console.error('Erro ao cadastrar corrida:', error);
+            toast.error(
+                error.response?.data?.message ||
+                'Erro ao solicitar corrida. Tente novamente.'
+            );
         } finally {
             setIsLoading(false);
         }
@@ -103,17 +157,11 @@ export default function CadastroCorrida() {
 
     return (
         <div className="min-h-screen bg-[#f3f4f6] py-8 px-4">
-            <div className={`mx-auto transition-all duration-300 ${corrida.origem && corrida.destino ? 'max-w-7xl' : 'max-w-2xl'}`}>
-                <div className="flex items-center text-sm text-[#6b7280] mb-4">
-                    <a href="/" className="hover:text-[#84cc16]">Home</a>
-                    <span className="mx-2">/</span>
-                    <span>Solicitar Corrida</span>
-                </div>
-
-                <div className="flex gap-8">
-                    {/* Form Column */}
-                    <div className={`bg-white p-8 rounded-lg shadow ${corrida.origem && corrida.destino ? 'w-1/2' : 'w-full'}`}>
-                        <h1 className="text-3xl font-bold text-[#374151] mb-6">
+            <div className={`mx-auto transition-all duration-300 ${corrida.origem && corrida.destino ? 'max-w-7xl' : 'max-w-xl'}`}>
+                <div className="flex flex-col md:flex-row gap-8">
+                    {/* Form Section */}
+                    <div className={`bg-white p-8 rounded-lg shadow ${corrida.origem && corrida.destino ? 'md:w-1/2' : 'w-full'}`}>
+                        <h1 className="text-3xl font-bold text-[#374151] mb-6 text-center">
                             Solicitar Nova Corrida
                         </h1>
 
@@ -234,9 +282,9 @@ export default function CadastroCorrida() {
                         </form>
                     </div>
 
-                    {/* Map Column */}
+                    {/* Map Section - Now side by side on desktop */}
                     {corrida.origem && corrida.destino && (
-                        <div className="w-1/2 bg-white p-8 rounded-lg shadow">
+                        <div className="bg-white p-8 rounded-lg shadow md:w-1/2">
                             <h2 className="text-2xl font-bold text-[#374151] mb-6">
                                 Visualização do Trajeto
                             </h2>
@@ -245,28 +293,24 @@ export default function CadastroCorrida() {
                                 destino={corrida.destino}
                             />
                             <div className="mt-4 p-4 bg-[#f3f4f6] rounded-lg">
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-3 gap-4">
                                     <div>
-                                        <p className="text-[#6b7280]">Distância Estimada:</p>
+                                        <p className="text-[#6b7280]">Distância:</p>
                                         <p className="font-medium">{corrida.distancia.toFixed(1)} km</p>
                                     </div>
                                     <div>
                                         <p className="text-[#6b7280]">Velocidade Média:</p>
-                                        <p className="font-medium">{corrida.velocidadeMedia.toFixed(0)} km/h</p>
+                                        <p className="font-medium">{corrida.velocidadeMedia} km/h</p>
                                     </div>
                                     {tempoInfo && (
-                                        <>
-                                            <div>
-                                                <p className="text-[#6b7280]">Tempo de Viagem:</p>
-                                                <p className="font-medium">{tempoInfo.tempoDeViagem}</p>
-                                            </div>
-                                            <div>
-                                                <p className="text-[#6b7280]">Previsão de Chegada:</p>
-                                                <p className="font-medium">
-                                                    {new Date(tempoInfo.tempoPrevistoChegada).toLocaleString()}
-                                                </p>
-                                            </div>
-                                        </>
+                                        <div>
+                                            <p className="text-[#6b7280]">Tempo Estimado:</p>
+                                            <p className="font-medium">{tempoInfo.tempoDeViagem}</p>
+                                            <p className="text-[#6b7280] mt-2">Chegada Prevista:</p>
+                                            <p className="font-medium">
+                                                {new Date(tempoInfo.tempoPrevistoChegada).toLocaleTimeString('pt-BR')}
+                                            </p>
+                                        </div>
                                     )}
                                 </div>
                             </div>

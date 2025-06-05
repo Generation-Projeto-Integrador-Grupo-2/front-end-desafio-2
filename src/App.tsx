@@ -11,30 +11,46 @@ import SobreNos from './pages/sobrenos/SobreNos'
 import CadastroMotorista from './components/motoristas/CadastroMotorista'
 import CadastroCorrida from './components/corridas/CadastroCorrida'
 import ListaCorridas from './pages/corridas/ListaCorridas'
+import ErrorBoundary from './components/ErrorBoundary';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <>
-      {/* <AuthProvider>
-        <BrowserRouter>
+      <BrowserRouter>
+        <AuthProvider>
           <Navbar />
           <div className="min-h-[80vh]">
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/cadastro" element={<Cadastro />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/sobrenos" element={<SobreNos />} />
-              <Route path="/perfil" element={<Perfil />} />
-              <Route path='/motoristas/cadastrar' element={<CadastroMotorista />} />
-              <Route path='/corridas/cadastrar' element={<CadastroCorrida />} />
-              <Route path='/corridas' element={<ListaCorridas />} />
-            </Routes>
+            <ErrorBoundary>
+              <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/cadastro" element={<Cadastro />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/sobrenos" element={<SobreNos />} />
+                <Route path="/perfil" element={<Perfil />} />
+                <Route path='/motoristas/cadastrar' element={<CadastroMotorista />} />
+                <Route path='/corridas/cadastrar' element={<CadastroCorrida />} />
+                <Route path='/corridas' element={<ListaCorridas />} />
+              </Routes>
+            </ErrorBoundary>
           </div>
           <Footer />
-        </BrowserRouter>
-      </AuthProvider> */}
-      <ListaCorridas />
+        </AuthProvider>
+      </BrowserRouter>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   )
 }

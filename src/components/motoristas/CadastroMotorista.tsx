@@ -5,10 +5,15 @@ import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { cadastrar } from '../../service/Service';
 import { toast } from 'react-toastify';
 
+interface MotoristaRequestDTO {
+    cnh: string;
+    modeloCarro: string;
+    placa: string;
+}
+
 export default function CadastroMotorista() {
     const navigate = useNavigate();
     const [motorista, setMotorista] = useState<Motorista>({
-        id: 0,
         cnh: '',
         modeloCarro: '',
         placa: '',
@@ -19,17 +24,51 @@ export default function CadastroMotorista() {
         e.preventDefault();
         setIsLoading(true);
 
+        // Validate fields before submission
+        if (motorista.cnh.length < 3 || motorista.cnh.length > 100) {
+            toast.error('CNH deve ter entre 3 e 100 caracteres');
+            setIsLoading(false);
+            return;
+        }
+
+        if (motorista.modeloCarro.length < 3 || motorista.modeloCarro.length > 100) {
+            toast.error('Modelo do carro deve ter entre 3 e 100 caracteres');
+            setIsLoading(false);
+            return;
+        }
+
+        if (motorista.placa.length < 3 || motorista.placa.length > 100) {
+            toast.error('Placa deve ter entre 3 e 100 caracteres');
+            setIsLoading(false);
+            return;
+        }
+
         const token = localStorage.getItem('token');
+
+        if (!token) {
+            toast.error('Sessão expirada. Por favor, faça login novamente.');
+            navigate('/login');
+            return;
+        }
+
         const header = {
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': token,
+                'Content-Type': 'application/json'
             }
+        };
+
+        // Create DTO object
+        const motoristaDTO: MotoristaRequestDTO = {
+            cnh: motorista.cnh,
+            modeloCarro: motorista.modeloCarro,
+            placa: motorista.placa
         };
 
         try {
             await cadastrar(
-                '/motoristas',
-                motorista,
+                '/motorista/cadastrar',
+                motoristaDTO,
                 setMotorista,
                 header
             );
@@ -37,7 +76,23 @@ export default function CadastroMotorista() {
             toast.success('Cadastro de motorista realizado com sucesso!');
             navigate('/perfil');
         } catch (error: any) {
-            toast.error(error.response?.data?.message || 'Erro ao cadastrar motorista');
+            if (error.response?.status === 400) {
+                // Check if error message contains specific text about being already registered
+                if (error.response.data.message?.includes('já é motorista')) {
+                    toast.warning('Você já está cadastrado como motorista!');
+                    navigate('/perfil'); // Redirect to profile since they're already registered
+                } else {
+                    const errorMessage = error.response.data.message ||
+                        'Dados inválidos. Verifique as informações fornecidas.';
+                    toast.error(errorMessage);
+                }
+            } else if (error.response?.status === 401) {
+                toast.error('Sessão expirada. Por favor, faça login novamente.');
+                localStorage.removeItem('token');
+                navigate('/login');
+            } else {
+                toast.error('Erro ao cadastrar motorista');
+            }
         } finally {
             setIsLoading(false);
         }

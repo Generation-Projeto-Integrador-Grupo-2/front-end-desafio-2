@@ -27,7 +27,7 @@ const Navbar = () => {
                         Home
                     </Link>
                     <Link
-                        to="/sobre"
+                        to="/sobrenos"
                         className={`${location.pathname === '/sobre'
                             ? 'text-[#374151]'
                             : 'text-[#354B45]'

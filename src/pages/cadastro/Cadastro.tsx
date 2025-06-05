@@ -20,7 +20,7 @@ function Cadastro() {
     email: '',
     senha: '',
     foto: '',
-    tipo: 'PASSAGEIRO'
+    tipo: null
   })
 
   function atualizarEstado(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
@@ -64,19 +64,23 @@ function Cadastro() {
     setIsLoading(true)
 
     try {
-      const { id, corrida, motorista, ...dadosUsuario } = usuario
+      const dadosParaCadastro = {
+        nome: usuario.nome,
+        email: usuario.email,
+        senha: usuario.senha,
+        foto: usuario.foto || '' // Provide default empty string if no photo
+      }
 
-      await cadastrarUsuario('/usuarios/cadastrar', dadosUsuario, () => { })
-      ToastAlerta('Usuário cadastrado com sucesso!')
+      await cadastrarUsuario('/usuarios/cadastrar', dadosParaCadastro, setUsuario)
+      ToastAlerta('Usuário cadastrado com sucesso!', 'sucesso')
       navigate('/login')
     } catch (error: any) {
-      ToastAlerta('Erro ao cadastrar usuário')
-      if (error.response) {
-        setErrorMsg(`Erro: ${error.response.status} - ${error.response.data?.message || error.response.statusText}`)
-      } else if (error.request) {
-        ToastAlerta('Erro: servidor não respondeu. Tente novamente mais tarde.')
+      console.error('Erro completo:', error)
+      ToastAlerta(error.response?.data?.message || 'Erro ao cadastrar usuário', 'erro')
+      if (error.response?.status === 400) {
+        setErrorMsg('Dados inválidos. Verifique as informações fornecidas.')
       } else {
-        setErrorMsg(`Erro: ${error.message}`)
+        setErrorMsg('Erro ao cadastrar usuário. Tente novamente mais tarde.')
       }
     } finally {
       setIsLoading(false)
@@ -122,12 +126,12 @@ function Cadastro() {
         </div>
 
         <div className="flex flex-col w-full">
-          <label htmlFor="usuario" className="text-[#374151]">Usuario</label>
+          <label htmlFor="email" className="text-[#374151]">Email</label>
           <input
             type="email"
-            id="usuario"
-            name="usuario"
-            placeholder="Usuario"
+            id="email"
+            name="email"
+            placeholder="Email"
             autoComplete="email"
             className="border-2 border-[#6B7280] rounded p-2 bg-[#F3F4F6] text-[#374151]"
             value={usuario.email}
@@ -147,22 +151,6 @@ function Cadastro() {
             value={usuario.foto}
             onChange={atualizarEstado}
           />
-        </div>
-
-        <div className="flex flex-col w-full">
-          <label htmlFor="tipo" className="text-[#374151]">Tipo de Usuário</label>
-          <select
-            id="tipo"
-            name="tipo"
-            className="border-2 border-[#6B7280] rounded p-2 bg-[#F3F4F6] text-[#374151]"
-            value={usuario.tipo || ''}
-            onChange={atualizarEstado}
-            required
-          >
-            <option value="">Selecione...</option>
-            <option value="PASSAGEIRO">Passageiro</option>
-            <option value="MOTORISTA">Motorista</option>
-          </select>
         </div>
 
         <div className="flex flex-col w-full">
