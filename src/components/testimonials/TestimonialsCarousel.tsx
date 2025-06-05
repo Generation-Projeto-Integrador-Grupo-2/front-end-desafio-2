@@ -1,3 +1,5 @@
+
+
 import { motion, useScroll, useMotionValue, useMotionValueEvent, animate, MotionValue } from "motion/react"
 import { useRef } from "react"
 
@@ -61,6 +63,7 @@ export default function TestimonialsCarousel() {
         </motion.ul>
       </div>
     </section>
+
   )
 }
 
@@ -70,6 +73,7 @@ const transparent = `#0000`, opaque = `#000`
 function useScrollOverflowMask(scrollXProgress: MotionValue<number>) {
   const maskImage = useMotionValue(
     `linear-gradient(90deg, ${opaque}, ${opaque} ${left}, ${opaque} ${rightInset}, ${transparent})`
+
   )
 
   useMotionValueEvent(scrollXProgress, "change", (value) => {
