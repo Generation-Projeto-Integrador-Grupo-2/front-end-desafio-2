@@ -37,6 +37,24 @@ const Navbar = () => {
                         Corridas
                     </Link>
                     <Link
+                        to="/corridas/cadastrar"
+                        className={`${location.pathname === '/corridas/cadastrar'
+                            ? 'text-[#374151]'
+                            : 'text-[#354B45]'
+                            } hover:text-[#84cc16] transition-colors font-semibold`}
+                    >
+                        Nova Corrida
+                    </Link>
+                    <Link
+                        to="/motoristas/cadastrar"
+                        className={`${location.pathname === '/motoristas/cadastrar'
+                            ? 'text-[#374151]'
+                            : 'text-[#354B45]'
+                            } hover:text-[#84cc16] transition-colors font-semibold`}
+                    >
+                        Cadastrar Motorista
+                    </Link>
+                    <Link
                         to="/sobre"
                         className={`${location.pathname === '/sobre'
                             ? 'text-[#374151]'
