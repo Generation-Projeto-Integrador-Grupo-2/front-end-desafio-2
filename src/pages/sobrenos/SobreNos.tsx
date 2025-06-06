@@ -23,7 +23,7 @@ function SobreNos() {
                                 <img src="https://i.imgur.com/qd9Plf4.jpeg" alt="Foto de Maria de Fátima" className="w-24 h-24 object-cover rounded-full shadow-md" />
                                 <p className="font-medium text-gray-800">Maria de Fátima</p>
                                 <p className="font-medium text-gray-800">Product Owner</p>
-                                <a href="https://www.linkedin.com/in/fatimaoliveira428/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#0077B5] transition-colors">
+                                <a href="https://www.linkedin.com/in/fatimaoliveira428/" target="_blank" rel="noopener noreferrer" className=" text-gray-600 hover:text-[#0077B5] transition-colors">
                                     <LinkedinLogoIcon size={32} weight="bold" />
                                 </a>
                             </div>
@@ -32,7 +32,7 @@ function SobreNos() {
                                 <img src="https://i.imgur.com/n4VJr0r.jpeg" alt="Foto de Luana Cardoso" className="w-24 h-24 object-cover rounded-full shadow-md" />
                                 <p className="font-medium text-gray-800">Luana Cardoso</p>
                                 <p className="font-medium text-gray-800">Tester</p>
-                                <a href="https://www.linkedin.com/in/luanacardosodasilva7/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#0077B5] transition-colors">
+                                <a href="https://www.linkedin.com/in/luanacardosodasilva7/" target="_blank" rel="noopener noreferrer" className="mt-auto text-gray-600 hover:text-[#0077B5] transition-colors">
                                     <LinkedinLogoIcon size={32} weight="bold" />
                                 </a>
                             </div>
@@ -41,7 +41,7 @@ function SobreNos() {
                                 <img src="https://i.imgur.com/815hFsM.jpeg" alt="Foto de Guilherme Lima" className="w-24 h-24 object-cover rounded-full shadow-md" />
                                 <p className="font-medium text-gray-800">Guilherme Lima</p>
                                 <p className="font-medium text-gray-800">Developer</p>
-                                <a href="https://www.linkedin.com/in/guilherme-lima-sousa-oliveira" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#0077B5] transition-colors">
+                                <a href="https://www.linkedin.com/in/guilherme-lima-sousa-oliveira" target="_blank" rel="noopener noreferrer" className="mt-auto text-gray-600 hover:text-[#0077B5] transition-colors">
                                     <LinkedinLogoIcon size={32} weight="bold" />
                                 </a>
                             </div>
@@ -50,7 +50,7 @@ function SobreNos() {
                                 <img src="https://i.imgur.com/NO5osOz.jpeg" alt="Foto de Leonardo de Paula" className="w-24 h-24 object-cover rounded-full shadow-md" />
                                 <p className="font-medium text-gray-800">Leonardo de Paula</p>
                                 <p className="font-medium text-gray-800">Developer</p>
-                                <a href="https://www.linkedin.com/in/leonardo-fernandes-pf/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#0077B5] transition-colors">
+                                <a href="https://www.linkedin.com/in/leonardo-fernandes-pf/" target="_blank" rel="noopener noreferrer" className="mt-auto text-gray-600 hover:text-[#0077B5] transition-colors">
                                     <LinkedinLogoIcon size={32} weight="bold" />
                                 </a>
                             </div>
@@ -59,7 +59,7 @@ function SobreNos() {
                                 <img src="https://i.imgur.com/RCiix3H.jpeg" alt="Foto de Caio Nascimento" className="w-24 h-24 object-cover rounded-full shadow-md" />
                                 <p className="font-medium text-gray-800">Caio Nascimento</p>
                                 <p className="font-medium text-gray-800">Developer</p>
-                                <a href="https://www.linkedin.com/in/caio-s-nascimento/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#0077B5] transition-colors">
+                                <a href="https://www.linkedin.com/in/caio-s-nascimento/" target="_blank" rel="noopener noreferrer" className="mt-auto text-gray-600 hover:text-[#0077B5] transition-colors">
                                     <LinkedinLogoIcon size={32} weight="bold" />
                                 </a>
                             </div>
@@ -67,8 +67,8 @@ function SobreNos() {
                             <div className="flex flex-col items-center text-center space-y-2">
                                 <img src="https://i.imgur.com/rpj3bzi.png" alt="Foto de Laura Nery" className="w-24 h-24 object-cover rounded-full shadow-md" />
                                 <p className="font-medium text-gray-800">Laura Nery</p>
-                                <p className="font-medium text-gray-800">Developer</p>
-                                <a href="https://www.linkedin.com/in/laura-nery-lon1999/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-[#0077B5] transition-colors">
+                                <p className="mt-auto font-medium text-gray-800">Developer</p>
+                                <a href="https://www.linkedin.com/in/laura-nery-lon1999/" target="_blank" rel="noopener noreferrer" className="mt-auto text-gray-600 hover:text-[#0077B5] transition-colors">
                                     <LinkedinLogoIcon size={32} weight="bold" />
                                 </a>
                             </div>

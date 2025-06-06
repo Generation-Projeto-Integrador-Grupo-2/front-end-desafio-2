@@ -94,7 +94,7 @@ const Navbar = () => {
                         <div className="flex gap-6 ml-auto">
                             <Link
                                 to="/login"
-                                className="text-[#354B45] hover:text-[#84cc16] transition-colors font-semibold"
+                                className="text-[#354B45] hover:text-[#84cc16] py-2 transition-colors font-semibold"
                             >
                                 Login
                             </Link>
